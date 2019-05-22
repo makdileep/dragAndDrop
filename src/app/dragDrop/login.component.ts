@@ -11,84 +11,37 @@ import { InputContainer } from '../shared/model/inputContainer';
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
-    styleUrls: ['./login.component.css']
+    styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
     title = 'app';
-    loginForm: FormGroup;
+    dragDropForm: FormGroup;
+    todo: any = [];
     inputFields: any = [];
     radioLabel: string = "Radio label";
     cBoxLebel: string = "Checkbox label";
     private dialogData = {
         inputType: ""
     }
-
-    // todo = [
-    //   {
-    //     type: "T",
-    //     name: "UserName"
-    //   },
-    //   {
-    //     type: "C",
-    //     name: "UserCheck"
-    //   },
-    //   {
-    //     type: "R",
-    //     name: "UserRadio"
-    //   },
-    //   {
-    //     type: "D",
-    //     name: "Select"
-    //   }
-    // ];
-
-    // todo = [
-    //   {
-    //     id: "I",
-    //     value: "Input Box"
-    //   },
-    //   {
-    //     id: "C",
-    //     value: "Check Box"
-    //   },
-    //   {
-    //     id: "S",
-    //     value: "Select Box"
-    //   },
-    //   {
-    //     id: "R",
-    //     value: "Radio Box"
-    //   }
-    // ];
-
-    todo = [
-        "InputBox",
-        "CheckBox",
-        "SelectBox",
-        "RadioBox",
-        "Button"
-    ];
-
-    done = [
-
-    ];
-
+    done = [];
+    countries: string[];
+    default: string = 'Select Option';
     constructor(private formBuilder: FormBuilder, private sharedData: SharedDataService,
         private router: Router, private dialog: MatDialog) {
-        this.loginForm = new FormGroup({
+        this.dragDropForm = new FormGroup({
             InputBox: new FormControl(''),
             CheckBox: new FormControl(''),
             RadioBox: new FormControl(''),
             SelectBox: new FormControl('')
         });
-
-        // this.loginForm.addControl('mani', new FormControl(''));
-        // this.loginForm.addControl('kalai', new FormControl(''));
-
+        this.dragDropForm.controls['SelectBox'].setValue(this.default, {onlySelf: true});
     }
 
     ngOnInit() {
+        this.todo = this.sharedData.todo;
+        this.countries = this.sharedData.countries;
     }
+
 
     drop(event: CdkDragDrop<string[]>) {
         if (event.previousContainer === event.container) {
@@ -99,25 +52,16 @@ export class LoginComponent implements OnInit {
                 event.previousIndex,
                 event.currentIndex);
         }
-        // this.inputFields.push(this.done);
-        // console.log(this.done);
-
-        switch (event.container.data) {
-            // case 'InputBox':
-        }
     }
 
     opemModel(event) {
         this.dialogData.inputType = event;
-        console.log(event);
         let dialogRef = this.dialog.open(DialogComponent, {
-            width: '500px',
+            width: '400px',
             data: this.dialogData,
-            // autoFocus: false
         });
 
         dialogRef.afterClosed().subscribe(result => {
-            console.log(result);
             if(result.fieldValue !== ""){
                 this.patchModelValues(result);
             } else {
@@ -127,14 +71,12 @@ export class LoginComponent implements OnInit {
     }
 
     patchModelValues(data: any) {
-        // console.log(data.fieldType);
-        // console.log(data.fieldValue);
         switch (data.fieldType) {
             case "T":
             case "P":
             case "E":
             case "N":
-                this.loginForm.patchValue({
+                this.dragDropForm.patchValue({
                     "InputBox": data.fieldValue
                 })
                 let inputType = (data.fieldType == "T") ? "text" : (data.fieldType == "P") ? "password" : (data.fieldType == "E") ? "email" : (data.fieldType == "N") ? "number" : "text";
@@ -165,9 +107,11 @@ export class LoginComponent implements OnInit {
                 break;
             case "select":
                 this.inputFields.push({ Name: "select", Value :data.fieldValue });
+                this.dragDropForm.controls['SelectBox'].setValue(data.fieldValue);
                 break;
             default:
-                console.log(this.loginForm.value.InputBox);
+                console.log("Not correct type");
+                break;
         }
 
         this.sharedData.inputArray = [];
@@ -176,14 +120,13 @@ export class LoginComponent implements OnInit {
         //     this.sharedData.inputArray.push(input);
         // }
         this.sharedData.inputArray = this.inputFields;
-        console.log(this.sharedData.inputArray);
     }
     
     publishUI() {
         this.router.navigate(['menu']);
     }
 
-    login() {
+    dragDrop() {
 
     }
 

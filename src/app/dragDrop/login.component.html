@@ -1,13 +1,13 @@
 <ng-container>
     <div class="row justify-content-center align-items-center" style="max-width: 100%;">
         <div class="col col-md-11 col-sm-11 col-xs-11">
-            <form [formGroup]="loginForm" (ngSubmit)="login()">
+            <form [formGroup]="dragDropForm" (ngSubmit)="dragDrop()">
                 <div class="card">
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-12" style="background-color: #aba6a6; padding: 20px;">
                                 <button mat-raised-button disabled>SAMPLE LOGO</button>
-                                <button class = "publish-btn" mat-raised-button (click)="publishUI()">PUBLISH</button>
+                                <button class="publish-btn" mat-raised-button (click)="publishUI()">PUBLISH</button>
                             </div>
                             <div class="col-md-4 col-sm-4 col-xs-12 text-center" style="background-color: #ecdadd">
                                 <div class="panel-box">
@@ -16,22 +16,7 @@
                                     <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="todo"
                                         [cdkDropListConnectedTo]="[doneList]" (cdkDropListDropped)="drop($event)">
                                         <div class="row">
-                                            <div class="col-md-5 example-box" *ngFor="let item of todo" cdkDrag
-                                                [ngSwitch]="item.type">
-                                                <!-- <div *ngSwitchCase="'T'">
-                                                    <input type="text" formControlName="{{item.name}}">
-                                                </div>
-                                                <div *ngSwitchCase="'D'">
-                                                    <select formControlName="{{item.name}}">
-                                                        <option [ngValue]="options">value</option>
-                                                    </select>
-                                                </div>
-                                                <div *ngSwitchCase="'R'">
-                                                    <input type="radio" formControlName="{{item.name}}">
-                                                </div>
-                                                <div *ngSwitchCase="'C'">
-                                                    <input type="checkbox" formControlName="{{item.name}}">
-                                                </div> -->
+                                            <div class="col-md-5 example-box" *ngFor="let item of todo" cdkDrag>
                                                 {{item}}
                                             </div>
                                         </div>
@@ -46,20 +31,23 @@
                                         [cdkDropListConnectedTo]="[todoList]" class="example-list" (cdkDropListDropped)="drop($event)">
                                         <div class="example-box" *ngFor="let item of done" cdkDrag [ngSwitch]="item">
                                             <div *ngSwitchCase="'InputBox'" (click)="opemModel('T')">
-                                                <input class="input-field-box" type="text" formControlName="{{item}}" placeholder="Input Field">
+                                                <input class="input-field-box" type="text" formControlName="{{item}}"
+                                                    placeholder="Input Field">
                                             </div>
                                             <div *ngSwitchCase="'SelectBox'" (click)="opemModel('S')">
                                                 <select class="input-field-box" formControlName="{{item}}">
-                                                    <option [ngValue]="options">value</option>
+                                                    <option *ngFor="let country of countries" [ngValue]="country">
+                                                        {{country }}
+                                                    </option>
                                                 </select>
                                             </div>
                                             <div *ngSwitchCase="'RadioBox'" (click)="opemModel('R')">
-                                                <input type="radio" formControlName="{{item}}">
-                                                <label class="input-label">{{radioLabel}}</label>
+                                                <input class="vertical-align" type="radio" formControlName="{{item}}">
+                                                <label class="margin-10">{{radioLabel}}</label>
                                             </div>
                                             <div *ngSwitchCase="'CheckBox'" (click)="opemModel('C')">
-                                                <input type="checkbox" formControlName="{{item}}">
-                                                <label class="input-label">{{cBoxLebel}}</label>
+                                                <input class="vertical-align" type="checkbox" formControlName="{{item}}">
+                                                <label class="margin-10">{{cBoxLebel}}</label>
                                             </div>
                                             <div *ngSwitchCase="'Button'" (click)="opemModel('B')">
                                                 <button class="workFlowBtn" mat-raised-button>{{item}}</button>
@@ -69,10 +57,10 @@
 
                                 </div>
                             </div>
-                            <div class="col-md-4 col-sm-4 col-xs-12" style="text-align: left;">
+                            <div class="col-md-4 col-sm-4 col-xs-12">
                                 <div class="panel-box">
-                                    <h6>JSON STRUCTURE</h6>
-                                    <div class="col-md-12">
+                                    <h6 class="text-center">JSON STRUCTURE</h6>
+                                    <div class="col-md-12" style="text-align: left;">
                                         <pre *ngIf="inputFields.length > 0">{{inputFields | json}}</pre>
                                     </div>
                                 </div>
@@ -80,26 +68,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- <div class="col col-md-12">
-                    <h5 class="header-text">Sign In With</h5>
-                </div>
-                <form [formGroup]="loginForm" (ngSubmit)="login()">
-                    <label>
-                        UserName:
-                        <input type="text" formControlName="name">
-                    </label>
-                    <label>
-                        Password:
-                        <input type="password" formControlName="password">
-                    </label>
-                    <div class="col-md-12">
-                        <button type="submit" class="button">
-                            Submit
-                        </button>
-                    </div>
-                </form> -->
-
                 </div>
             </form>
         </div>

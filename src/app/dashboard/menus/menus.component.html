@@ -9,29 +9,31 @@
                                 <button mat-raised-button>SAMPLE LOGO</button>
                             </div>
                             <div class="card col-md-6 card-center">
-                                    <div *ngFor="let item of sampleLogo" [ngSwitch]="item.Name">
-                                            <div *ngSwitchCase="'input'" class="card-data">
-                                                <input class="input-field-box" type="text" formControlName="inputBox">
-                                            </div>
-                                            <div *ngSwitchCase="'select'" class="card-data">
-                                                <select class="input-field-box" formControlName="selectBox">
-                                                    <option [ngValue]="options">value</option>
-                                                </select>
-                                            </div>
-                                            <div *ngSwitchCase="'radio'" class="card-data">
-                                                <input type="radio" formControlName="radioBox">
-                                                <label class="input-label">{{item.Value}}</label>
-                                            </div>
-                                            <div *ngSwitchCase="'checkbox'" class="card-data">
-                                                <input type="checkbox" formControlName="checkBox">
-                                                <label class="input-label">{{item.Value}}</label>
-                                            </div>
-                                            <div *ngSwitchCase="'button'" class="card-data">
-                                                <button class="workFlowBtn" mat-raised-button>{{item.Value}}</button>
-                                            </div>
-                                        </div>
+                                <div *ngFor="let item of sampleLogo" [ngSwitch]="item.Name">
+                                    <div *ngSwitchCase="'input'" class="card-data">
+                                        <input class="input-field-box" type="text" formControlName="inputBox">
+                                    </div>
+                                    <div *ngSwitchCase="'select'" class="card-data">
+                                        <select class="input-field-box" formControlName="selectBox">
+                                            <option *ngFor="let country of countries" [ngValue]="country">
+                                                    {{country }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div *ngSwitchCase="'radio'" class="card-data">
+                                        <input class="vertical-align" type="radio" formControlName="radioBox">
+                                        <label class="margin-10">{{item.Value}}</label>
+                                    </div>
+                                    <div *ngSwitchCase="'checkbox'" class="card-data">
+                                        <input class="vertical-align" type="checkbox" formControlName="checkBox">
+                                        <label class="margin-10">{{item.Value}}</label>
+                                    </div>
+                                    <div *ngSwitchCase="'button'" class="card-data">
+                                        <button class="workFlowBtn" mat-raised-button>{{item.Value}}</button>
+                                    </div>
+                                </div>
                             </div>
-                           
+
                         </div>
                     </div>
                 </div>

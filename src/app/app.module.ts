@@ -8,34 +8,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './/app-routing.module';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './dragDrop/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-// import { MatDialogModule } from '@angular/material';
 import { DialogComponent } from './dialog/dialog.component';
-// import { MaterialModule } from '.@angular/material.module';
 import {
   MatCardModule,
   MatButtonModule,
-  MatGridListModule,
-  MatToolbarModule,
-  MatMenuModule,
-  MatIconModule,
-  MatSidenavModule,
-  MatListModule,
   MatDialogModule,
-  MatFormFieldModule,
-  MatSnackBarModule,
-  MatStepperModule,
-  MatInputModule,
-  MatDatepickerModule,
-  MatNativeDateModule,    
-  MatSelectModule,
-  MatTabsModule,
-  MatAutocompleteModule,
-  MatButtonToggleModule,
-  MatBottomSheetModule,
-  MatTableModule
+  MatInputModule
 } from '@angular/material';
 import { SharedDataService } from './service/shared-data.service';
 
@@ -60,7 +41,6 @@ import { SharedDataService } from './service/shared-data.service';
     MatButtonModule,
     MatCardModule,
     MatInputModule
-    // MaterialModule
   ],
   entryComponents: [DialogComponent],
   providers: [SharedDataService],

@@ -5,29 +5,32 @@ import { FormGroup, FormControl } from '@angular/forms';
 @Component({
     selector: 'app-menus',
     templateUrl: './menus.component.html',
-    styleUrls: ['./menus.component.css'],
+    styleUrls: ['./menus.component.scss'],
 
 })
 export class MenusComponent implements OnInit {
     sampleLogo: any = [];
     sampleLogoForm: FormGroup;
+    countries: string[];
     constructor(private sd: SharedDataService) {
         this.sampleLogoForm = new FormGroup({
             inputBox: new FormControl(''),
-            checkBox: new FormControl(''),
-            radioBox: new FormControl(''),
+            checkBox: new FormControl('true'),
+            radioBox: new FormControl('true'),
             selectBox: new FormControl('')
         });
+        this.countries = this.sd.countries;
     }
 
     ngOnInit() {
-        console.log(this.sd.inputArray);
         this.sampleLogo = this.sd.inputArray;
         this.sampleLogo.forEach(element => {
             if (element.Name == 'input') {
                 this.sampleLogoForm.patchValue({
                     'inputBox': element.Value
                 })
+            } else if(element.Name == 'select') {
+                this.sampleLogoForm.controls['selectBox'].setValue( element.Value);
             }
         });
 

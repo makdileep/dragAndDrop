@@ -2,42 +2,45 @@
 <div mat-dialog-content class="dialog-content">
     <form [formGroup]="modifyForm" (ngSubmit)="modifyFormSubmit()">
         <div class="row" *ngIf="dialogOptions.inputType == 'T' || dialogOptions.inputType == 'B'" [ngSwitch]="dialogOptions.inputType">
-            <div class="col-md-6">
-                <label>Input Type</label>
+            <div class="col-md-4">
+                <label class="modify-text">Input Type</label>
             </div>
             <div class="col-md-6">
                 <div *ngSwitchCase="'T'">
-                    <select formControlName="fieldType">
+                    <select class="input-field-dialog bg-gray" formControlName="fieldType">
                         <option *ngFor="let type of inputType" [value]="type.value">{{type.title}}</option>
                     </select>
                 </div>
                 <div *ngSwitchCase="'B'">
-                    <select formControlName="fieldType">
+                    <select class="input-field-dialog bg-gray" formControlName="fieldType">
                         <option *ngFor="let type of btnType" [value]="type.value">{{type.title}}</option>
                     </select>
                 </div>
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-md-6">
-                <label>value</label>
-            </div>
+        <div class="row margin-top20">
             <div class="col-md-4">
-                <input class="input-field-box" type="text" formControlName="fieldValue" placeholder="Enter here">
+                <label class="modify-text">value</label>
+            </div>
+            <div class="col-md-6">
+                <div *ngIf="dialogOptions.inputType == 'S'">
+                    <select class="input-field-dialog bg-gray" formControlName="fieldValue">
+                        <option *ngFor="let country of countries" [value]="country">{{country}}</option>
+                    </select>
+                </div>
+                <div *ngIf="dialogOptions.inputType != 'S'">
+                        <input class="input-field-dialog bg-gray" type="text" formControlName="fieldValue" placeholder="Enter here">
+                </div>
             </div>
         </div>
 
         <div class="row">
-                <div class="col-md-12">
-                    <button class="save-Btn" type="submit" mat-raised-button cdkFocusInitial>SAVE</button>
-                    <button class="cancel_btn" mat-stroked-button (click)="onCancelClick()">CANCEL</button>
-                </div>
-                <!-- </div>
-                    <button class = "save-Btn" type="submit" mat-raised-button cdkFocusInitial>SAVE</button>
-                    <button  class = "cancel_btn" mat-stroked-button (click)="onCancelClick()">CANCEL</button>
-                </div> -->
+            <div class="col-md-12 margin-top20">
+                <button class="save-Btn" type="submit" mat-raised-button cdkFocusInitial>SAVE</button>
+                <button class="cancel_btn" mat-stroked-button (click)="onCancelClick()">CANCEL</button>
             </div>
+        </div>
     </form>
-    
+
 </div>

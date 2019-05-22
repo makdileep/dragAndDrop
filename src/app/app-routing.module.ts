@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { MenusComponent } from './dashboard/menus/menus.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './dragDrop/login.component';
 
 const routes: Routes = [
   {
