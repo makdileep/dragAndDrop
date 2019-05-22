@@ -1,0 +1,41 @@
+<ng-container>
+    <div class="row justify-content-center align-items-center" style="max-width: 100%;">
+        <div class="col col-md-11 col-sm-11 col-xs-11">
+            <form [formGroup]="sampleLogoForm" (ngSubmit)="sampleLogosubmit()">
+                <div class="card">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-12" style="background-color: #aba6a6; padding: 20px;">
+                                <button mat-raised-button>SAMPLE LOGO</button>
+                            </div>
+                            <div class="card col-md-6 card-center">
+                                    <div *ngFor="let item of sampleLogo" [ngSwitch]="item.Name">
+                                            <div *ngSwitchCase="'input'" class="card-data">
+                                                <input class="input-field-box" type="text" formControlName="inputBox">
+                                            </div>
+                                            <div *ngSwitchCase="'select'" class="card-data">
+                                                <select class="input-field-box" formControlName="selectBox">
+                                                    <option [ngValue]="options">value</option>
+                                                </select>
+                                            </div>
+                                            <div *ngSwitchCase="'radio'" class="card-data">
+                                                <input type="radio" formControlName="radioBox">
+                                                <label class="input-label">{{item.Value}}</label>
+                                            </div>
+                                            <div *ngSwitchCase="'checkbox'" class="card-data">
+                                                <input type="checkbox" formControlName="checkBox">
+                                                <label class="input-label">{{item.Value}}</label>
+                                            </div>
+                                            <div *ngSwitchCase="'button'" class="card-data">
+                                                <button class="workFlowBtn" mat-raised-button>{{item.Value}}</button>
+                                            </div>
+                                        </div>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</ng-container>

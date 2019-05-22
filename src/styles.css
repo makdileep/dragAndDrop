@@ -1,0 +1,27 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+.text-center {
+    text-align: center; 
+}
+
+.header-text{
+    color: darkblue
+}
+
+.otp-container-class .mat-dialog-container {
+    padding: 0px;
+    overflow: initial;
+}
+
+.input-field-box {
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 5px 10px;
+    width: 200px;
+}
+
+.workFlowBtn {
+    background-color: lightgray;
+    width: 200px;
+    height: 34px;
+  }   
